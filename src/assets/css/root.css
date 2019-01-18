@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+}
+body{
+    background: green;
+    display: flex;
+    flex-direction: column;
+}
+
+#root{
+    flex: 1;
+    padding: 0 20px;
+}
+#app{
+    padding-bottom: 20px;
+    text-align: center;
+}
