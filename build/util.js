@@ -1,6 +1,6 @@
 const path = require("path");
-const config=require("../config/config").config;
-const imgCompressConfig=require("../config/config").imgCompressConfig;
+const config = require("../config/config").config;
+const imgCompressConfig = require("../config/config").imgCompressConfig;
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");//导出css的插件
 /**
@@ -16,16 +16,15 @@ exports.getProjectRootPath = (relativePath) => {
  *
  * @param config {
  *     type:"style",   可选参数【style,link 】在html中加入style标签引入css 还是加入link标签
-    cssConbine:false,  type=link 可以选择是否合并css 代码到一个文件中
+ *     其他参数参考 https://webpack.js.org/loaders/css-loader/#modules
  * }
  */
 exports.getCssLoader = (userConfig) => {
     let config = {
         type: "style",
-        cssConbine: false,
     };
 
-    Object.assign(config,userConfig);
+    Object.assign(config, userConfig);
     let loadersArray = [];
     loadersArray.push(getLoader("css", config))
     loadersArray.push(getLoader("scss", config))
@@ -37,34 +36,26 @@ exports.getCssLoader = (userConfig) => {
 const getLoader = (cssType, config) => {
 
 
-    let {type, cssConbine} = config;
+    let {type} = config;
     let loaderObj = {
         test: new RegExp('\\.' + cssType + '$'), // 针对CSS结尾的文件设置LOADER
     };
 
-    if (type == 'link' && cssConbine) {
+    let cssLoaderOption=Object.assign({},config);
+    delete cssLoaderOption.type;
+
+    if (type == 'link') {
         //link标签的形式，并且合并css
         loaderObj.use = [
             MiniCssExtractPlugin.loader,
-            'css-loader',
+            {
+                loader: "css-loader",        //通过 <style>标签引入html
+                options: cssLoaderOption
+            },
             "postcss-loader"
         ]
     }
-    else if (type == 'link' && !cssConbine) {
-        //link标签的形式，并且不合并css
-
-        throw ("这块代码等待完善！！")
-        loaderObj.use = [
-            "style-loader/url",
-            {
-                loader: "file-loader",   //通过link 标签引入html
-                options: {
-                    name: 'css/[name].css'
-                }
-            }
-        ]
-    }
-    else if (type == 'style'){
+    else if (type == 'style') {
         // style标签引入
         loaderObj.use = [
             {
@@ -75,13 +66,12 @@ const getLoader = (cssType, config) => {
             },
             {
                 loader: "css-loader",        //通过 <style>标签引入html
-                options: {
-                    localIdentName: '[local]'
-                }
+                options: cssLoaderOption
             },
             "postcss-loader"
         ]
     }
+
     if (cssType != 'css') {
         if (cssType == 'scss') {
             loaderObj.use.push({
@@ -98,8 +88,8 @@ const getLoader = (cssType, config) => {
     return loaderObj;
 }
 
-exports.getImgLoader=()=>{
-    let userArray=[
+exports.getImgLoader = () => {
+    let userArray = [
         {
             loader: "url-loader",
             options: {
@@ -115,7 +105,7 @@ exports.getImgLoader=()=>{
                 outputPath: "./img/"   //配置输出路径
             }
         }];
-    if (config.compressImg){
+    if (config.compressImg) {
         userArray.push(imgCompressConfig)
     }
     return userArray

@@ -1,9 +1,11 @@
 //以下所有的相对路径根据项目的根目录
 exports.config={
     entryPath:"./index.js",
-    cssLoaderConfig:{
+    cssLoaderConfig:{        //用于配置cssLoader 其他参数参考 https://webpack.js.org/loaders/css-loader/#modules
         type: "link",       //仅有 link  和 style 两个选项
-        cssConbine: true,
+        modules: false,
+        localIdentName: '[local]',
+        sourceMap:false
     },
     templatePath:"./index.html",  //html模板位置
     compressImg:true,               //是否需要压缩图片

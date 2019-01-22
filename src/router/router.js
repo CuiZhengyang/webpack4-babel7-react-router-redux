@@ -3,8 +3,8 @@ import React from "react";
 import {loadable} from "./loadable";
 
 const Index = loadable(import(/* webpackChunkName: 'Index'*/ "../component/Index/Index.js"));
-const About = loadable(import(/* webpackChunkName: 'About'*/ "../component/About/Index.js"));
-const Users = loadable(import(/* webpackChunkName: 'Users'*/ "../component/Users/Index.js"));
+const ReduxDemo = loadable(import(/* webpackChunkName: 'Redux'*/ "../component/Redux/Index.js"));
+const RouterDemo = loadable(import(/* webpackChunkName: 'Router'*/ "../component/Router/Index.js"));
 
 
 
@@ -18,17 +18,17 @@ export default function Root() {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/about">About</Link>
+                            <Link to="/redux">react+react-router+redux</Link>
                         </li>
                         <li>
-                            <Link to="/users">Users</Link>
+                            <Link to="/router">react+react-router</Link>
                         </li>
                     </ul>
                 </nav>
                 <Switch>
                     <Route exact path="/" exact component={Index}/>
-                    <Route  path="/about" component={About}/>
-                    <Route  path="/:users" component={Users}/>
+                    <Route  path="/redux" component={ReduxDemo}/>
+                    <Route  path="/router" component={RouterDemo}/>
                 </Switch>
             </React.Fragment>
         </Router>

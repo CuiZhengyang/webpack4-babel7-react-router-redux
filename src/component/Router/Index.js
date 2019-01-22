@@ -1,5 +1,6 @@
 import React from "react"
 import {withRouter} from "react-router"
+import style from "./router.css"
 
  class Users extends React.Component {
 
@@ -17,14 +18,15 @@ import {withRouter} from "react-router"
     }
     render() {
         let {history}=this.props;
+        console.log(style)
 
         return (
-            <React.Fragment>
+            <div id="rooter">
                 <h2>这个模块告诉你如何仅使用react+react-router</h2>
                 <a onClick={()=>{
                     history.push("/")
                 }}>  去首页</a>
-            </React.Fragment>
+            </div>
         );
     }
 

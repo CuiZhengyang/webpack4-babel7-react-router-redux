@@ -122,13 +122,13 @@ module.exports = env => {
     let cssLoaderArray = getCssLoader(config.cssLoaderConfig);
     baseConfig.module.rules=baseConfig.module.rules.concat(cssLoaderArray);
 
-    if (config.cssLoaderConfig.cssConbine && config.cssLoaderConfig.type == 'link') {
+    if (!config.cssLoaderConfig.cssConbine && config.cssLoaderConfig.type == 'link') {
         baseConfig.plugins.unshift(
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional
-                filename: env=="development"?"css/[name].css":"css/[name].css",
-                chunkFilename: env=="development"?"css/[name].css":"css/[name].css",
+                filename: env=="development"?"css/[name].css":"css/[name].[hash:10].css",
+                chunkFilename: env=="development"?"css/[name].css":"css/[name].[hash:10].css",
             }))
     }
 
