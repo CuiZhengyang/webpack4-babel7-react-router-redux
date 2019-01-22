@@ -26,11 +26,12 @@ class About extends React.Component {
                 <br/>
                 <div>
                     <div>
-                        <a  onClick={()=>upArray(array.length,result)}> remenber result</a>
+                        <a  onClick={()=>upArray(array.length,result)}> remenber result</a><br/>
+                        <a onClick={()=>removeArrayItem(['array'])}>clear result</a>
                     </div>
                     <ul>
                         {
-                            array.map((item,index)=>{
+                            !!array&&array.map((item,index)=>{
                                 return (
                                     <li key={index}>{item.value}  <span> <a onClick={()=>removeArrayItem(['array',index])} > delete</a></span></li>
                                 )
