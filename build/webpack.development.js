@@ -4,6 +4,7 @@ const getProjectRootPath=require('./util').getProjectRootPath;
 const config=require('../config/config');
 
 
+
 //开发模式与webpack-dev-server
 const webpack=require('webpack')
 
@@ -19,7 +20,10 @@ module.exports =(env)=> {
             hotOnly:true,
             overlay: true, // 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架
             proxy: config[env].proxy,
-            historyApiFallback: config[env].historyApiFallback
+            historyApiFallback: config[env].historyApiFallback,
+            watchContentBase: true,
+            useLocalIp: true,
+            host: config[env].host,
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),

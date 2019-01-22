@@ -25,7 +25,7 @@ module.exports = env => {
             publicPath: config[env].publicPath, //js引用路径或者CDN地址,注意output.publicPath参数，代表：js文件内部引用其他文件的路径
             path: getProjectRootPath(config[env].path),//打包文件的输出路径
             filename: env == "development" ? "[name].js" : "[name].[hash:10].js",
-            chunkFilename: env == "development" ? "chunk/[name].js" : "chunk/[name].[hash:10].js",
+            chunkFilename: env == "development" ? "js/[name].js" : "js/[name].[hash:10].js",
         },
         mode: env,
         optimization: {
@@ -44,7 +44,7 @@ module.exports = env => {
                     // },
                     // 首先: 打包node_modules中的文件
                     vendor: {
-                        name: "js/vendor",
+                        name: "vendor",
                         test: /[\\/]node_modules[\\/]/,
                         chunks: "all",
                         priority: 10

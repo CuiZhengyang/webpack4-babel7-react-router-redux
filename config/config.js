@@ -5,11 +5,12 @@ let config={
         type: "link",       //仅有 link  和 style 两个选项
         cssConbine: true,
     },
-    templatePath:"./index.html",
+    templatePath:"./index.html",  //html模板位置
     development:{
         publicPath:"/",
-        path:"./dist/",
+        path:"./dist/",                    //告诉服务器从那么目录开始提供内容
         openPage:"./index.html",
+        host: '0.0.0.0',
         port:"5000",
         proxy:{},
         historyApiFallback:{
@@ -18,8 +19,9 @@ let config={
         }
     },
     production:{
-        publicPath:"./",
-        path:"./dist/"
+        publicPath:"./",    //生产上项目中静态资源的url 公共地址
+        path:"./dist/",      //打包文件存放目录
+        BundleAnalyzer:true         //是否分析
     }
 }
 

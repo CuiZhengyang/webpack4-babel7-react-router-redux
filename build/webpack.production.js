@@ -4,7 +4,7 @@ const getProjectRootPath=require('./util').getProjectRootPath;
 const config=require('../config/config');
 
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports =(env)=> {
 
@@ -17,7 +17,9 @@ module.exports =(env)=> {
         ]
     }
     let baseWebpack=getBaseWebpack(env);
+    if(config[env].BundleAnalyzer){
+        proWebpack.plugins.push(new BundleAnalyzerPlugin())
+    }
 
     return merge(proWebpack, baseWebpack);
-
 };

@@ -2,3 +2,21 @@ $bgColor: white !default;
 div{
   color: $bgColor;
 }
+
+
+.box .ani1 {
+  background: url("../icon/1.jpg") no-repeat;
+  background-size: cover;
+}
+.box .ani2 {
+  background: url("../icon/2.jpg") no-repeat;
+  background-size: cover;
+}
+.box .ani3 {
+  background: url("../imgs/3.png") no-repeat;
+  background-size: cover;
+}
+.box .ani4 {
+  background: url("../imgs/frAy.gif") no-repeat;
+  background-size: cover;
+}
