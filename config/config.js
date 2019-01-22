@@ -8,7 +8,7 @@ exports.config={
         sourceMap:false
     },
     templatePath:"./index.html",  //html模板位置
-    compressImg:true,               //是否需要压缩图片
+    compressImg:true,               //是否需要压缩图片,配置文件在下面的对象
     development:{
         publicPath:"/",
         path:"./dist/",                    //告诉服务器从那么目录开始提供内容
