@@ -1,11 +1,12 @@
 //以下所有的相对路径根据项目的根目录
-let config={
+exports.config={
     entryPath:"./index.js",
     cssLoaderConfig:{
         type: "link",       //仅有 link  和 style 两个选项
         cssConbine: true,
     },
     templatePath:"./index.html",  //html模板位置
+    compressImg:true,               //是否需要压缩图片
     development:{
         publicPath:"/",
         path:"./dist/",                    //告诉服务器从那么目录开始提供内容
@@ -25,4 +26,22 @@ let config={
     }
 }
 
-module.exports=config;
+
+exports.imgCompressConfig={
+    //用于压缩图片 https://github.com/imagemin/imagemin-gifsicle
+    loader: "image-webpack-loader",
+    options: {
+        mozjpeg: {
+            progressive: true,
+            quality: 65
+        },
+        pngquant: {
+            quality: '65-90',
+            speed: 4
+        },
+        gifsicle: {
+            interlaced: true,
+            optimizationLevel: 3
+        }
+    }
+}

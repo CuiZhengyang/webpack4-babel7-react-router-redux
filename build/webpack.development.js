@@ -1,7 +1,7 @@
 const merge = require("webpack-merge");
 const getBaseWebpack=require('./webpack.base');
 const getProjectRootPath=require('./util').getProjectRootPath;
-const config=require('../config/config');
+const config=require('../config/config').config;
 
 
 
@@ -21,9 +21,13 @@ module.exports =(env)=> {
             overlay: true, // 如果代码出错，会在浏览器页面弹出“浮动层”。类似于 vue-cli 等脚手架
             proxy: config[env].proxy,
             historyApiFallback: config[env].historyApiFallback,
-            watchContentBase: true,
             useLocalIp: true,
             host: config[env].host,
+            watchContentBase: true,
+            watchOptions: {
+                poll: true
+            },
+            compress: true
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),

@@ -1,5 +1,5 @@
 const getProjectRootPath = require('./util').getProjectRootPath;
-const config = require('../config/config')
+const config = require('../config/config').config;
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -14,6 +14,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //获取cssLoder
 const getCssLoader = require('./util').getCssLoader;
+const getImgLoader=require("./util").getImgLoader();
 
 module.exports = env => {
 
@@ -77,41 +78,7 @@ module.exports = env => {
                 },
                 {
                     test: /\.(png|jpg|jpeg|gif)$/,
-                    use: [
-                        {
-                            loader: "url-loader",
-                            options: {
-                                name: function (file) { //配置图片的输出位置
-                                    let directorys = file.split("/")
-                                    if (process.env.NODE_ENV === 'development') {
-                                        return directorys[directorys.length - 2] + '/[name].[ext]';
-                                    }
-                                    return directorys[directorys.length - 2] + '/[name].[hash:10].[ext]';
-                                },
-                                limit: 1000, // size <= 20KB
-                                publicPath: "../img/", //修改css 文件中的路径
-                                outputPath: "./img/"   //配置输出路径
-                            }
-                        },
-                        {
-                            //用于压缩图片 https://github.com/imagemin/imagemin-gifsicle
-                            loader: "image-webpack-loader",
-                            options: {
-                                mozjpeg: {
-                                    progressive: true,
-                                    quality: 65
-                                },
-                                pngquant: {
-                                    quality: '65-90',
-                                    speed: 4
-                                },
-                                gifsicle: {
-                                    interlaced: true,
-                                    optimizationLevel: 3
-                                }
-                            }
-                        }
-                    ]
+                    use:getImgLoader
                 },
                 {
                     test: /\.(eot|woff2?|ttf|svg)$/,

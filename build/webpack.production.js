@@ -1,7 +1,7 @@
 const merge = require("webpack-merge");
 const getBaseWebpack=require('./webpack.base');
 const getProjectRootPath=require('./util').getProjectRootPath;
-const config=require('../config/config');
+const config=require('../config/config').config;
 
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;

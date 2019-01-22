@@ -1,4 +1,6 @@
 const path = require("path");
+const config=require("../config/config").config;
+const imgCompressConfig=require("../config/config").imgCompressConfig;
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");//导出css的插件
 /**
@@ -94,4 +96,27 @@ const getLoader = (cssType, config) => {
     }
 
     return loaderObj;
+}
+
+exports.getImgLoader=()=>{
+    let userArray=[
+        {
+            loader: "url-loader",
+            options: {
+                name: function (file) { //配置图片的输出位置
+                    let directorys = file.split("/")
+                    if (process.env.NODE_ENV === 'development') {
+                        return directorys[directorys.length - 2] + '/[name].[ext]';
+                    }
+                    return directorys[directorys.length - 2] + '/[name].[hash:10].[ext]';
+                },
+                limit: 1000, // size <= 20KB
+                publicPath: "../img/", //修改css 文件中的路径
+                outputPath: "./img/"   //配置输出路径
+            }
+        }];
+    if (config.compressImg){
+        userArray.push(imgCompressConfig)
+    }
+    return userArray
 }
