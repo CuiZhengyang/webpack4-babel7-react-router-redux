@@ -30,6 +30,9 @@ module.exports = env => {
         },
         mode: env,
         optimization: {
+            // runtimeChunk: {
+            //     name: "js/runtime",
+            // },
             splitChunks: {  //分隔代码
                 chunks: 'all',
                 //们将需要打包的代码放在cacheGroups属性中,这块的代码将来根据个个项目自己来决定如何配置
@@ -37,12 +40,12 @@ module.exports = env => {
                 cacheGroups: {
                     // 注意: priority属性
                     // 其次: 打包业务中公共代码
-                    // common: {
-                    //     name: "common",
-                    //     chunks: "all",
-                    //     minSize: 1,
-                    //     priority: 0
-                    // },
+                    common: {
+                        name: "common",
+                        chunks: "all",
+                        minSize: 1,
+                        priority: 0
+                    },
                     // 首先: 打包node_modules中的文件
                     vendor: {
                         name: "vendor",

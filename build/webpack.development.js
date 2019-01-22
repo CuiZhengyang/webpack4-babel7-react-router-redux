@@ -23,7 +23,7 @@ module.exports =(env)=> {
             historyApiFallback: config[env].historyApiFallback,
             useLocalIp: true,
             host: config[env].host,
-            watchContentBase: true,
+            watchContentBase: true,  //好像不起作用
             watchOptions: {
                 poll: true
             },
