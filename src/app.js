@@ -5,7 +5,7 @@ import "./assets/css/bass.less"
 import "./assets/fonts/iconfont.css"
 import Root from "./router/router"
 import {Provider} from "react-redux"
-import store from "./redux/redux"
+
 
 export default class APP extends React.Component {
 
@@ -15,16 +15,12 @@ export default class APP extends React.Component {
 
     render() {
         return (
-            <Provider store={store}>
-                <React.Fragment>
-                    <div>
-                        this is a React Hello World!!
-                    </div>
-                    <Root></Root>
-                </React.Fragment>
-            </Provider>
-
+            <React.Fragment>
+                <div>
+                    this is a React Hello World!!
+                </div>
+                <Root></Root>
+            </React.Fragment>
         )
-
     }
 }
