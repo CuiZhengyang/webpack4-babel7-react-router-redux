@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router"
-import {REMOVE_STORE, UPDATE_STORE} from "../../redux/redux";
+import {UPDATE_STORE} from "../../redux/redux";
 
 class About extends React.Component {
     render() {
-        let {number1, number2, result, upNumber,array,upArray,removeArrayItem} = this.props;
+        let {number1, number2, result, upNumber} = this.props;
         // console.log(array)
         return (
             <React.Fragment>
@@ -23,23 +23,6 @@ class About extends React.Component {
                     <span>=</span><br/>
                     <input type="text" value={result} readOnly/>
                 </div>
-                <br/>
-                <div>
-                    <div>
-                        <a  onClick={()=>upArray(array.length,result)}> remenber result</a><br/>
-                        <a onClick={()=>removeArrayItem(['array'])}>clear result</a>
-                    </div>
-                    <ul>
-                        {
-                            !!array&&array.map((item,index)=>{
-                                return (
-                                    <li key={index}>{item.value}  <span> <a onClick={()=>removeArrayItem(['array',index])} > delete</a></span></li>
-                                )
-                            })
-                        }
-                    </ul>
-
-                </div>
             </React.Fragment>
         );
     }
@@ -47,10 +30,9 @@ class About extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        number1: state.getIn(['number1']),
-        number2: state.getIn(['number2']),
-        result: state.getIn(['result']),
-        array:state.getIn(['array'])
+        number1: state['number1'],
+        number2: state['number2'],
+        result: state['result']
     }
 }
 const mapDispathToActions = (dispatch) => {
@@ -73,21 +55,10 @@ const mapDispathToActions = (dispatch) => {
         dispatch(UPDATE_STORE(obj))
     }
 
-    let upArray=(key,value)=>{
-        let obj = {
-            array: [{key,value}]
-        }
-        dispatch(UPDATE_STORE(obj))
-    }
 
-    let removeArrayItem=(keyArray)=>{
-        dispatch(REMOVE_STORE(keyArray))
-    }
 
     return {
-        upNumber,
-        upArray,
-        removeArrayItem
+        upNumber
     }
 }
 

@@ -1,7 +1,6 @@
 import {createStore, applyMiddleware} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from "redux-thunk"
-import {mergeDeep,Map,removeIn} from "immutable"
 
 let middleWare = [thunk]
 
@@ -24,34 +23,23 @@ export const REMOVE_STORE=( keyArray)=>{
 }
 
 
-let initstate = Map({
+let initstate = {
     number1: 0,
     number2: 0,
     result: 0,
-    array:[{key:0,value:0}]
-})
+}
 
 function getMergeImmutableObj(oldState,updateParam) {
-    return mergeDeep(oldState,Map(updateParam));
+    return Object.assign({},oldState,updateParam)
 }
 
-function getRemoveImmutableObj(oldState,keyArray) {
-    if(oldState.hasIn(keyArray))
-    {
-        return removeIn(oldState,keyArray)
-    }
-    else{
-        return oldState;
-    }
-}
+
 
 function counter(state = initstate, action) {
     switch (action.type) {
 
         case UPDATE_STORE_STATE:
             return getMergeImmutableObj(state,action.param);
-        case REMOVE_STORE_BY_KEY:
-            return getRemoveImmutableObj(state,action.param);
         default:
             return state
     }
