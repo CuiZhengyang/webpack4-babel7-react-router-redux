@@ -4,7 +4,7 @@ import "./assets/css/common.scss"
 import "./assets/css/bass.less"
 import "./assets/fonts/iconfont.css"
 import Root from "./router/router"
-import {Provider} from "react-redux"
+
 
 
 export default class APP extends React.Component {
