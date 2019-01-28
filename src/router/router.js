@@ -22,7 +22,7 @@ export default function Root() {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route exact path="/" exact component={Index}/>
+                    <Route exact path="/"  component={Index}/>
                     <Route  path="/router" component={RouterDemo}/>
                 </Switch>
             </React.Fragment>
