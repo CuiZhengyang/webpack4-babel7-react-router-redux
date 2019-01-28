@@ -26,7 +26,7 @@ export default function Root() {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route exact path="/" exact component={Index}/>
+                    <Route exact path="/"  component={Index}/>
                     <Route  path="/redux" component={ReduxDemo}/>
                     <Route  path="/router" component={RouterDemo}/>
                 </Switch>
