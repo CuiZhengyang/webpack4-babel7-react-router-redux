@@ -6,7 +6,7 @@
 
 const presets = [
     "@babel/preset-react",
-    ["@babel/env", {
+    ["@babel/preset-env", {
         "modules": false,
         "targets": {
             "node": "current",
